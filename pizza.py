@@ -1,10 +1,39 @@
 import numpy as np
 import time
 
-arr = np.array([[1,0,1,1,0,1,0,0],[1,0,1,1,1,0,0,1],[1,0,1,1,1,0,0,1],[1,1,1,1,0,0,1,1],[0,0,0,0,1,1,0,1],[1,1,1,0,0,1,0,1],[0,1,0,1,0,1,0,1]])
-print arr
-np.set_printoptions(threshold = np.nan)
-r,c,l,h = 7,8,3,8
+
+class extractInput:
+  def __init__(self, fileName):
+    self.fileName = fileName
+
+  def input_file(self):
+    my_file = open(self.fileName)
+    read_myfile = my_file.read()
+    my_line = read_myfile.split('\n')
+
+    my_info = my_line[0]
+    my_info = my_info.split(" ")
+    my_info = self.listStr_listInt(my_info)
+
+    my_arr = self.extrct_Arr(my_info[0], my_info[1], my_line)
+    return my_info[0], my_info[1], my_info[2], my_info[3], my_arr
+
+  def listStr_listInt(self, lst):
+    new_lst = []
+    for my_str in lst:
+      new_lst.append(int(my_str))
+    return new_lst
+
+  def extrct_Arr(self, row, column, lst):
+    my_arr = np.zeros((row, column), dtype = np.uint8)
+    for pos in range(row):
+      line = lst[pos + 1]
+      line = line.replace("T", "1")
+      line = line.replace("M", "0")
+      my_arr[pos] = self.listStr_listInt(list(line))
+    return my_arr
+
+
 
 class cutSlice:
   def __init__(self, r,c,l,h,arr):
@@ -190,6 +219,10 @@ class cutSlice:
     x_end = int(coord[1]) + x_start
     y_end = int(coord[0]) + y_start
     return x_end, y_end
+
+
+fileput = extractInput("small.in")
+r,c,l,h,arr = fileput.input_file()
 
 cut = cutSlice(r,c,l,h,arr)
 
