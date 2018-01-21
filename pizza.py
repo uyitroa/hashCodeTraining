@@ -233,14 +233,6 @@ class cutSlice:
     y_end = int(coord[0]) + y_start
     return x_end, y_end
 
-
-def calculatePoint(my_list):
-  total = 0
-  for x in range(len(my_list)):
-    my_tuple = my_list[x]
-    total += (my_tuple[2] - my_tuple[0] + 1) * (my_tuple[3] - my_tuple[1] + 1)
-  return total
-
 def fileOutput(lst):
   outputFile = open("submit.out", "w")
   myarray = ""
