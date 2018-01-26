@@ -3,7 +3,7 @@ import time
 #np.set_printoptions(threshold=np.nan)
 
 
-class extractInput:
+class ExtractInput:
   def __init__(self, fileName):
     self.fileName = fileName
 
@@ -36,7 +36,7 @@ class extractInput:
 
 
 
-class cutSlice:
+class CutSlice:
   def __init__(self, r,c,l,h,arr, demo):
     # row , column, ingre min, size max, pizza
     self.r = r
@@ -76,7 +76,7 @@ class cutSlice:
   def scanArr(self):
     x_start = 0 # scan position
     y_start = 0
-    self.notFinised = 1 in self.arr or 0 in self.arr # check if there's still "cell" unchecked
+    self.notFinised = False # check if there's still "cell" unchecked
     test = 0 # nothing special tbh
     solution = []
     posShape = self.shapePos
@@ -278,11 +278,11 @@ def fileOutput(lst):
   return submit
 
 fileName = raw_input("name of file: ")
-demo = int(raw_input("Demonstration? (time.sleep each loop and print array to see what is happening) 0 or 1 : "))
-fileput = extractInput(fileName)
+demo = int(raw_input("Demonstration? (time.sleep each loop and print array to see what is happening in each loop) 0 or 1 : "))
+fileput = ExtractInput(fileName)
 r,c,l,h,arr = fileput.input_file()
 
-slice = cutSlice(r,c,l,h,arr,demo)
+slice = CutSlice(r,c,l,h,arr,demo)
 cut = slice.cut_myD()
 print fileOutput(cut)
 print calculatePoint(cut), "points out of", r * c
