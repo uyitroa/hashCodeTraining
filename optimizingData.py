@@ -36,8 +36,8 @@ class Fill:
                 self.subset_sum(self.server, size)
 
             condition = "self.my_sum(my_list[x],1) < self.my_sum(my_list[x + 1], 1)"
-            print self.combo
-            print element
+            #print self.combo
+            #print element
             my_choice = self.bubbleSort(self.combo, condition)
             my_choice = my_choice[0]
 
