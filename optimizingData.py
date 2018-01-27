@@ -1,6 +1,8 @@
 import numpy as np
 from collections import Counter
 
+# cannot find an optimized algorithm for hash code qualification round 2015 without backtracking
+
 class Fill:
 
     def __init__(self, row, column, slot_unv, amountPool, amountServer, unvaCoord, server):
