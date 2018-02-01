@@ -8,19 +8,19 @@ class StreamLoli:
 		self.vid_desc, self.amount_vid = vid_desc, len(vid_desc)
 		self.latency, self.endpoints = latency, len(latency)
 		self.resq_desc, self.amount_resq = resq_desc, len(resq_desc)
-        self.amount_cache, self.cache_desc = cache_desc[0], [cache_desc[1]] * cache_desc[0]
-        self.cache_stokage = []
+		self.amount_cache, self.cache_desc = cache_desc[0], [cache_desc[1]] * cache_desc[0]
+		self.cache_stokage = []
 
 	def deal(self): # main function
 
-	#rearrange resquest list to get most point
-	condition = "lst[x][2] * self.vid_desc[lst[x][0]] < lst[x + 1][2] * self.vid_desc[lst[x + 1][0]]"
-	self.resq_desc = self.bubbleSort(self.resq_desc,condition)
+		#rearrange resquest list to get most point
+		condition = "lst[x][2] * self.vid_desc[lst[x][0]] < lst[x + 1][2] * self.vid_desc[lst[x + 1][0]]"
+		self.resq_desc = self.bubbleSort(self.resq_desc,condition)
 
-	#rearrange latency list by smallest to biggest
-	for pos in range(len(self.latency)):
-		my_distance = self.latency[pos]
-		self.latency[pos] = self.bubbleSort(my_distance,"lst[x][1] > lst[x + 1][1]")
+		#rearrange latency list by smallest to biggest
+		for pos in range(len(self.latency)):
+			my_distance = self.latency[pos]
+			self.latency[pos] = self.bubbleSort(my_distance,"lst[x][1] > lst[x + 1][1]")
 
 		#deal with resquest now
 		for x in range(self.amount_resq):
@@ -47,8 +47,7 @@ class StreamLoli:
 		for x in range(len(connected_cache)):
 			if connected_cache[x][0] == -1: # if direct
 				return connected_cache[x][0]
-
-            else:
+			else:
 				my_cache = self.cache_desc[connected_cache[x][0]] # cache_desc = [100,100,100] or [200,200,200]
 				if size <= my_cache:
 					self.cache_desc[connected_cache[x][0]] -= size
