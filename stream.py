@@ -9,7 +9,8 @@ class StreamLoli:
 		self.latency, self.endpoints = latency, len(latency)
 		self.resq_desc, self.amount_resq = resq_desc, len(resq_desc)
 		self.amount_cache, self.cache_desc = cache_desc[0], [cache_desc[1]] * cache_desc[0]
-		self.cache_stokage = []
+		self.solution = ["x"] * self.amount_cache
+
 
 	def deal(self): # main function
 
@@ -27,10 +28,14 @@ class StreamLoli:
 			point = self.resq_desc[x][1]
 			size = self.vid_desc[self.resq_desc[x][0]]
 			my_index = self.set_cache(point,size) #suitable cache
+			if my_index != -1:
+				if self.solution[my_index] == "x":
+					self.solution[my_index] = str(my_index) + " " + str(self.resq_desc[x][0])
+				else:
+					self.solution[my_index] += " " + str(self.resq_desc[x][0])
+		print self.solution
 
-
-
-	def bubbleSort(self, lst, condition = "lst[x] < lst[x + 1]"):
+	def bubbleSort(self, lst, condition = "lst[x] < lst[x + 1]"): #sort
 		# args: [1,2,3] or [(1,2),(3,0)], condition
 
 		for passLeft in range(len(lst) - 1, 0, -1):
@@ -46,7 +51,7 @@ class StreamLoli:
 		connected_cache = self.latency[point]
 		for x in range(len(connected_cache)):
 			if connected_cache[x][0] == -1: # if direct
-				return connected_cache[x][0]
+				return -1
 			else:
 				my_cache = self.cache_desc[connected_cache[x][0]] # cache_desc = [100,100,100] or [200,200,200]
 				if size <= my_cache:
@@ -67,3 +72,4 @@ resq_desc = [(3, 0, 1500), (0, 1, 1000), (4, 0, 500), (1, 0, 1000)]
 cache_desc = (3, 100)
 
 stream = StreamLoli(vid_desc, resq_desc, cache_desc, latency)
+stream.deal()
